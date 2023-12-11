@@ -82,3 +82,20 @@ exports.logout = async (req, res) => {
         res.status(500).send({ message: err.message });
     }
 };
+
+exports.getAllSessions = async (req, res) => {
+    try {
+      const sessions = await Session.find();
+  
+      // Extracting login and userId from each session
+      const formattedSessions = sessions.map((session) => {
+        const sessionData = JSON.parse(session.session);
+        const { login, userId } = sessionData;
+        return { login, userId };
+      });
+  
+      res.json(formattedSessions);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
