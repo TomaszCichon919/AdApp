@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
                 res.status(400).send({ message: 'User or password are incorrect' });
             } else {
                 if (bcrypt.compareSync(password, user.password)) {
-                    req.session.userId = user._id; // Store the user's ID in the session
+                    req.session.userId = user._id; 
                     req.session.login = user.login;
                     res.status(200).send({ message: 'Login successful' });
                 } else {
@@ -58,7 +58,7 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-    res.send('I am logged in')
+    res.status(200).send({login: req.session.login})
 
 }
 exports.logout = async (req, res) => {
@@ -66,14 +66,12 @@ exports.logout = async (req, res) => {
         await Session.deleteMany({});
     try {
         if (req.session) {
-            const sessionId = req.session.id; // Get the session ID
-
-            // Clear the session associated with the current session ID
+            const sessionId = req.session.id; 
             await req.session.destroy();
 
-            // Remove the session from the sessions collection in the database
+   
             await req.sessionStore.clear({
-                _id: sessionId, // Clear the session by ID
+                _id: sessionId, 
             });
 
             res.status(200).send({ message: 'Logged out successfully' });

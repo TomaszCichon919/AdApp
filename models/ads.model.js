@@ -6,7 +6,7 @@ const adSchema = new mongoose.Schema({
     date: { type: String, required: true },
     photo: { type: String, required: true },
     price: { type: String, required: true },
-    adress: { type: String, required: true },
+    address: { type: String, required: true },
     seller: { type: String, required: true },
 });
 

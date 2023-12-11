@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
     session({
-      secret: process.env.secret,
+      secret: process.env.SECRET,
       store: MongoStore.create({
         mongoUrl: 'mongodb://0.0.0.0:27017/AdApp', 
         mongooseConnection: mongoose.connection,
