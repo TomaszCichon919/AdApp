@@ -1,5 +1,4 @@
 const Session = require('../models/Sessions.model');
-const User = require('../models/users.model');
 const authMiddleware = async (req, res, next) => {
 
   if (process.env.NODE_ENV !== "production") {
