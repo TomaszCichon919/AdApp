@@ -1,0 +1,1 @@
+export const API_URL = process.env.NODE_ENV === 'error' ? '/' : 'http://localhost:8000';
