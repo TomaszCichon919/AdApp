@@ -60,29 +60,22 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-    const loggedInUsers = Array.from(activeSessions.values());
-    res.status(200).send({ loggedInUsers });
+    const user = Array.from(activeSessions.values());
+    res.status(200).send({ user });
 
 }
 exports.logout = async (req, res) => {
-    if (process.env.NODE_ENV !== "production")
-        await Session.deleteMany({});
     try {
         if (req.session) {
             const sessionId = req.session.id; 
             await req.session.destroy();
-
-   
-            await req.sessionStore.clear({
-                _id: sessionId, 
-            });
 
             res.status(200).send({ message: 'Logged out successfully' });
         } else {
             res.status(400).send({ message: 'No active session' });
         }
     } catch (err) {
-        res.status(500).send({ message: err.message });
+        res.status(500).send({ message: 'Error during logout process', error: err.message });
     }
 };
 

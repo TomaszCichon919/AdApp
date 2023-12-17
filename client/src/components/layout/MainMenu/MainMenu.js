@@ -9,6 +9,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
+import { useSelector } from 'react-redux';
 
 const MainMenu = () => {
 
@@ -17,7 +18,7 @@ const MainMenu = () => {
   const toggle = () => {
     setIsOpen(!isOpen);
   }
-
+  const isLoggedIn = useSelector(state => state.user !== null);
   return (
     <div>
       <Navbar color="dark" dark expand="md">
@@ -28,14 +29,28 @@ const MainMenu = () => {
             <NavItem>
               <NavLink href="/">Home</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/register">Register</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/order-a-ticket">
-                <Button outline color="primary">Order a ticket!</Button>
-              </NavLink>
-            </NavItem>
+            {!isLoggedIn && ( // Show register and login links only if not logged in
+              <>
+                <NavItem>
+                  <NavLink href="/register">Register</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/login">
+                    <Button outline color="primary">Log in!</Button>
+                  </NavLink>
+                </NavItem>
+              </>
+            )}
+            {isLoggedIn && ( // Show logout button only if logged in
+            <>
+              <NavItem>
+                <NavLink href="/logout">Sign out</NavLink>
+              </NavItem>
+               <NavItem>
+               <NavLink href="/ad/add">Add new ad</NavLink>
+             </NavItem>
+                 </>
+            )}
           </Nav>
         </Collapse>
       </Navbar>

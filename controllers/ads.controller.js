@@ -57,7 +57,7 @@ exports.addNew = async (req, res) => {
       });
 
       await newAd.save();
-      res.json({ message: 'OK' });
+      res.status(201).send({ message: 'Ad succesfully added' })
     } else {
       if (req.file) {
         fs.unlinkSync('./public/uploads/' + req.file.filename);

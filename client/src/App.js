@@ -1,4 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { API_URL } from './config.js'
+import { logIn } from '../src/redux/usersRedux.js'
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 
@@ -17,7 +21,38 @@ import Logout from './components/pages/Logout/Logout.js';
 
 const App = () => {
 
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const fetchLoggedInUser = async () => {
+      try {
+        const response = await fetch(`${API_URL}/auth/user`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          const userData = await response.json();
+  
+          if (Array.isArray(userData.user) && userData.user.length > 0) {
+            const user = { login: userData.user[0] };
+            dispatch(logIn(user));
+          } else {
+            console.log('No users found.');
+            // Handle the case when no users are available
+          }
+        } else {
+          console.error('Failed to fetch logged-in user');
+        }
+      } catch (error) {
+        console.error('Error fetching logged-in user:', error);
+      }
+    };
+  
+    fetchLoggedInUser();
+  }, []); 
 
 
 
