@@ -14,7 +14,14 @@ import Login from './components/pages/Login/Login.js';
 import Register from './components/pages/Register/Register.js';
 import Logout from './components/pages/Logout/Logout.js';
 
-const App = () => (
+
+const App = () => {
+
+
+
+
+
+return (
   <MainLayout>
     <Routes>
       <Route path="/" element={<Home />} />
@@ -30,11 +37,7 @@ const App = () => (
     </Routes>
   </MainLayout>
 );
+};
 
 export default App;
-// router.get('/ads', AdController.getAll);
-// router.get('/ads/:id', AdController.getById);
-// router.post('/ads', authMiddleware, iamgeUpload.single('photo'), AdController.addNew);
-// router.put('/ads/:id', authMiddleware, iamgeUpload.single('photo'), AdController.edit);
-// router.delete('/ads/:id', authMiddleware, AdController.delete);
-// router.get('/ads/search/:searchPhrase', AdController.searchAds);
+

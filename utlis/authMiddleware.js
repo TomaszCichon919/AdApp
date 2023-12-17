@@ -2,7 +2,6 @@ const Session = require('../models/Sessions.model');
 const authMiddleware = async (req, res, next) => {
 
   if (process.env.NODE_ENV !== "production") {
-
     try {
       const sessionRecord = await Session.findOne({});
 
@@ -16,7 +15,7 @@ const authMiddleware = async (req, res, next) => {
         login: sessionData.login,
         id: sessionData.userId,
       }
- 
+ console.log('login process');
       next();
     }
     catch (err) {

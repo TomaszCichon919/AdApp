@@ -4,6 +4,7 @@ const Session = require('../models/Sessions.model');
 const getImageFileType = require('../utlis/getImageFileType');
 const fs = require('fs');
 
+const activeSessions = new Map();
 
 exports.register = async (req, res) => {
     try {
@@ -44,6 +45,7 @@ exports.login = async (req, res) => {
                 if (bcrypt.compareSync(password, user.password)) {
                     req.session.userId = user._id; 
                     req.session.login = user.login;
+                    activeSessions.set(req.session.id, user.login);
                     res.status(200).send({ message: 'Login successful' });
                 } else {
                     res.status(400).send({ message: 'User or password are incorrect' });
@@ -58,7 +60,8 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-    res.status(200).send({login: req.session.login})
+    const loggedInUsers = Array.from(activeSessions.values());
+    res.status(200).send({ loggedInUsers });
 
 }
 exports.logout = async (req, res) => {

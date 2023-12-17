@@ -31,7 +31,7 @@ export const loadAdsRequest = () => {
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${API_URL}/api/ads`);
+      let res = await axios.get('http://localhost:8000/api/ads');
       dispatch(loadAds(res.data));
       dispatch(endRequest());
 

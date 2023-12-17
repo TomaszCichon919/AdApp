@@ -2,7 +2,11 @@ import { Container } from 'reactstrap';
 
 
 const Logout = () => (
-  <Container>
+ 
+
+ 
+ 
+ <Container>
     <h1>Logout</h1>
 
   </Container>

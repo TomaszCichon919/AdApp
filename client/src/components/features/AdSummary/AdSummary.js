@@ -14,8 +14,8 @@ const AdSummary = ({ title, photo, adress, }) =>
       
     </div>
         </Col>
-          {/* <img className="concert__info__back" src={photo} alt={title}/>
-          <h2 className="concert__info__performer">{ adress }</h2> */}
+          <img className="concert__info__back" src={photo} alt={title}/>
+          <h2 className="concert__info__performer">{ adress }</h2>
 
 
   </article>
