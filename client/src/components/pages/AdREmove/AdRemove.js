@@ -1,36 +1,45 @@
 import { Container } from 'react-bootstrap';
-import { API_URL } from '../../../config';
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../../redux/usersRedux'
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { API_URL } from '../../../config';
+import { removeAd } from '../../../redux/adsRedux';
 
 const AdRemove = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    
-    useEffect(()=> {
-    
-    const options = {
-      method: 'DELETE',
+  useEffect(() => {
+    const removeAdFromServer = async () => {
+      try {
+        const options = {
+          method: 'DELETE',
+        };
+
+        const response = await fetch(`${API_URL}/api/ads/${id}`, options);
+
+        if (response.ok) {
+          dispatch(removeAd(id));
+          navigate('/');
+        } else {
+          throw new Error('Failed to delete ad');
+        }
+      } catch (error) {
+        console.error('Error removing ad:', error);
+      }
     };
-    
-    fetch(`${API_URL}/api/logout`, options)
-     .then(()=> {
-    dispatch(logOut());
-    navigate('/');
-    
-     });
-    }, [dispatch]);
 
-return (
-  <Container>
-    <h1>AdRemove</h1>
-    
-    
-  </Container>
-);
-}
+    removeAdFromServer();
+  }, [dispatch, id, navigate]);
+
+  return (
+    <Container>
+      <h1>AdRemove</h1>
+      {/* You might add some loading or success/error messages here */}
+    </Container>
+  );
+};
 
 export default AdRemove;
+

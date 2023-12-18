@@ -3,20 +3,19 @@ import thunk from 'redux-thunk';
 import initialState from './InitialState';
 
 // import reducers
-import ads from './adsRedux';
-import seats from './seatsRedux';
+import adsReducer from './adsRedux';
 import userReducer from './usersRedux';
 
 // combine reducers
-const rootReducer = combineReducers({
-  ads,
-  seats,
+const subreducers = {
+  ads: adsReducer,
   user: userReducer,
 
-});
+}
 
+const reducer = combineReducers(subreducers)
 const store = createStore(
-  rootReducer,
+  reducer,
   initialState,
   compose(
 		applyMiddleware(thunk),

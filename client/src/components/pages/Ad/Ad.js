@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import { IMGS_URL } from '../../../config'
 import { API_URL } from '../../../config';
 
@@ -56,7 +55,7 @@ console.log('is?', canEditOrDelete)
     
       const handleDeleteClick = () => {
         if (canEditOrDelete) {
-            navigate(`/add/remove/${ad._id}`)
+            navigate(`/ad/remove/${ad._id}`)
         }
       };
 

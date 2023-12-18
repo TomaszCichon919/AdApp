@@ -1,9 +1,9 @@
-import axios from 'axios';
+
 import { API_URL } from '../config';
 
 /* SELECTORS */
-export const getAds = ({ ads }) => ads.data;
-export const getRequest = ({ ads }) => ads.request;
+export const getAds = ({ ads }) => ads;
+
 
 /* ACTIONS */
 
@@ -11,62 +11,54 @@ export const getRequest = ({ ads }) => ads.request;
 const reducerName = 'ads';
 const createActionName = name => `app/${reducerName}/${name}`;
 
-const START_REQUEST = createActionName('START_REQUEST');
-const END_REQUEST = createActionName('END_REQUEST');
-const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+
 
 const LOAD_ADS = createActionName('LOAD_ADS');
+const REMOVE_ADS = createActionName('REMOVE_ADS');
+const EDIT_ADS = createActionName('EDIT_ADS');
 
-export const startRequest = () => ({ type: START_REQUEST });
-export const endRequest = () => ({ type: END_REQUEST });
-export const errorRequest = error => ({ error, type: ERROR_REQUEST });
+
 
 export const loadAds = payload => ({ payload, type: LOAD_ADS });
-
+export const removeAd = payload => ({ type: REMOVE_ADS, payload });
+export const editPost = payload => ({ type: EDIT_ADS, payload });
 
 /* THUNKS */
 
+
 export const loadAdsRequest = () => {
   return async dispatch => {
-
-    dispatch(startRequest());
     try {
+      const response = await fetch('http://localhost:8000/api/ads');
 
-      let res = await axios.get('http://localhost:8000/api/ads');
-      dispatch(loadAds(res.data));
-      dispatch(endRequest());
-
-    } catch(e) {
-      dispatch(errorRequest(e.message));
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(loadAds(data)); // Dispatch the action with fetched data
+      } else {
+        throw new Error('Failed to fetch');
+      }
+    } catch (error) {
+      console.error('Error fetching ads:', error);
     }
-
   };
 };
 
-/* INITIAL STATE */
 
-const initialState = {
-  data: [],
-  request: {
-    pending: false,
-    error: null,
-    success: null,
-  },
-};
 
 /* REDUCER */
 
-export default function reducer(statePart = initialState, action = {}) {
-  switch (action.type) {
-    case LOAD_ADS: 
-      return { ...statePart, data: [...action.payload] };
-    case START_REQUEST:
-      return { ...statePart, request: { pending: true, error: null, success: false } };
-    case END_REQUEST:
-      return { ...statePart, request: { pending: false, error: null, success: true } };
-    case ERROR_REQUEST:
-      return { ...statePart, request: { pending: false, error: action.error, success: false } };
+const adsReducer =(statePart = [], action = {}) => {
+    switch (action.type) {
+      case LOAD_ADS:
+        return [...action.payload]
+      case REMOVE_ADS:
+        const updatedAds = statePart.filter(ad => ad._id !== action.payload);
+        statePart = updatedAds
+        return statePart;
+        case EDIT_ADS:
+      return statePart.map(ad => (ad._id === action.payload.id ? { ...ad, ...action.payload } : ad));
     default:
       return statePart;
   }
 }
+export default adsReducer;

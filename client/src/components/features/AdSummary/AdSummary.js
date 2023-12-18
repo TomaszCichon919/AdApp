@@ -28,16 +28,6 @@ const AdSummary = ({ title, photo, address, _id}) =>
               Read More
             </Button>
           </Link>
-          <Link key={_id} to={'/add/edit/' + _id}>
-            <Button className='mb-2 align-self-end' variant='warning' block>
-              Edit
-            </Button>
-          </Link>
-          <Link key={_id} to={'/add/remove/' + _id}>
-            <Button className='mb-2 align-self-end' variant='danger' block>
-              Edit
-            </Button>
-          </Link>
         </div>
       </Col>
     </Row>
