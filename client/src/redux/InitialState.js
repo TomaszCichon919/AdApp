@@ -1,6 +1,6 @@
 const initialState = {
     ads: [],
-    usres: null
+    users: null
 }
 
 export default initialState;

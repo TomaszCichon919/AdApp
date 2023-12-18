@@ -69,7 +69,9 @@ exports.logout = async (req, res) => {
         if (req.session) {
             const sessionId = req.session.id; 
             await req.session.destroy();
-
+     
+            activeSessions.delete(sessionId);
+            
             res.status(200).send({ message: 'Logged out successfully' });
         } else {
             res.status(400).send({ message: 'No active session' });

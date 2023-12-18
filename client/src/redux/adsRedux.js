@@ -23,6 +23,7 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 
 export const loadAds = payload => ({ payload, type: LOAD_ADS });
 
+
 /* THUNKS */
 
 export const loadAdsRequest = () => {
