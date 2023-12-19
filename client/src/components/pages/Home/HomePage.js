@@ -24,11 +24,11 @@ return (
       <div>
       <Form className="col-12 col-sm-3 mx-auto" onSubmit={handleSubmit}>
   
-  <h1 className="my-4">Add new Ad</h1>
+  
 
   
   <Form.Group className="mb-3" controlId="formTitle">
-    <Form.Label>Title</Form.Label>
+    <Form.Label>Search for ads</Form.Label>
     <Form.Control type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter login"></Form.Control>
   </Form.Group>
 
