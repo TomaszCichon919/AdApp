@@ -23,7 +23,7 @@ dispatch(logOut());
 navigate('/');
 
  });
-}, [dispatch]);
+}, [dispatch, navigate]);
 
 return (
  

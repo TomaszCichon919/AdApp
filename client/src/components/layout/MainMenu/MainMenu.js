@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 const MainMenu = () => {
 
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const toggle = () => {
     setIsOpen(!isOpen);
   }
@@ -29,7 +29,7 @@ const MainMenu = () => {
             <NavItem>
               <NavLink href="/">Home</NavLink>
             </NavItem>
-            {!isLoggedIn && ( // Show register and login links only if not logged in
+            {!isLoggedIn && (
               <>
                 <NavItem>
                   <NavLink href="/register">Register</NavLink>
@@ -41,15 +41,15 @@ const MainMenu = () => {
                 </NavItem>
               </>
             )}
-            {isLoggedIn && ( // Show logout button only if logged in
-            <>
-              <NavItem>
-                <NavLink href="/logout">Sign out</NavLink>
-              </NavItem>
-               <NavItem>
-               <NavLink href="/ad/add">Add new ad</NavLink>
-             </NavItem>
-                 </>
+            {isLoggedIn && (
+              <>
+                <NavItem>
+                  <NavLink href="/logout">Sign out</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/ad/add">Add new ad</NavLink>
+                </NavItem>
+              </>
             )}
           </Nav>
         </Collapse>

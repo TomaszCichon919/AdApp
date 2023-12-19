@@ -36,7 +36,7 @@ const AdRemove = () => {
 
   return (
     <Container>
-   <p>removing ad...</p>
+   <p>Removing ad...</p>
     </Container>
   );
 };

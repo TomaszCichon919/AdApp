@@ -3,9 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { API_URL } from './config.js'
 import { logIn } from '../src/redux/usersRedux.js';
-
-
-
 import MainLayout from './components/layout/MainLayout/MainLayout';
 
 // import routes
@@ -35,16 +32,16 @@ const App = () => {
             'Content-Type': 'application/json',
           },
         });
-  
+
         if (response.ok) {
           const userData = await response.json();
-  
+
           if (Array.isArray(userData.user) && userData.user.length > 0) {
             const user = { login: userData.user[0] };
             dispatch(logIn(user));
           } else {
             console.log('No users found.');
-  
+
           }
         } else {
           console.error('Failed to fetch logged-in user');
@@ -53,29 +50,29 @@ const App = () => {
         console.error('Error fetching logged-in user:', error);
       }
     };
-  
+
     fetchLoggedInUser();
-  }, []); 
-
-  
+  }, []);
 
 
-return (
-  <MainLayout>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/ad/:id" element={<Ad />} />
-      <Route path="/ad/add" element={<AdAdd />} />
-      <Route path="/ad/edit/:id" element={<AdEdit />} />
-      <Route path="/ad/remove/:id" element={<AdRemove />} />
-      <Route path="/search/:searchPhrase" element={<Search />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/logout" element={<Logout />} />
-      <Route element={<NotFound />} />
-    </Routes>
-  </MainLayout>
-);
+
+
+  return (
+    <MainLayout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ad/:id" element={<Ad />} />
+        <Route path="/ad/add" element={<AdAdd />} />
+        <Route path="/ad/edit/:id" element={<AdEdit />} />
+        <Route path="/ad/remove/:id" element={<AdRemove />} />
+        <Route path="/search/:searchPhrase" element={<Search />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route element={<NotFound />} />
+      </Routes>
+    </MainLayout>
+  );
 };
 
 export default App;
