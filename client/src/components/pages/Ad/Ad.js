@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { IMGS_URL } from '../../../config'
 import { API_URL } from '../../../config';
-
 import { getUser } from '../../../redux/usersRedux';
 
 
@@ -43,7 +42,7 @@ useEffect(() => {
     }
   
 
-    const canEditOrDelete = user &&  user.login === ad.seller;
+    const canEditOrDelete = user &&  user.login === ad.seller.login;
 
 console.log('is?', canEditOrDelete)
     const handleEditClick = () => {

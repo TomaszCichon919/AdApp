@@ -1,9 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { API_URL } from './config.js'
 import { logIn } from '../src/redux/usersRedux.js';
-import { useSelector } from 'react-redux';
+
 
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
@@ -44,7 +44,7 @@ const App = () => {
             dispatch(logIn(user));
           } else {
             console.log('No users found.');
-            // Handle the case when no users are available
+  
           }
         } else {
           console.error('Failed to fetch logged-in user');
@@ -59,16 +59,12 @@ const App = () => {
 
   
 
-  const isLoggedIn = useSelector(state => state.user !== null);
 
 return (
   <MainLayout>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/ad/:id" element={<Ad />} />
-      {/* <Route path="/ad/add">
-        {isLoggedIn ? <AdAdd /> : <Navigate to="/login" />}
-      </Route> */}
       <Route path="/ad/add" element={<AdAdd />} />
       <Route path="/ad/edit/:id" element={<AdEdit />} />
       <Route path="/ad/remove/:id" element={<AdRemove />} />

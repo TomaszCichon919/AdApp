@@ -71,15 +71,15 @@ exports.addNew = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const { title, content, date, price, address } = req.body;
-    const adToUpdate = await Ad.findById(req.params.id);
+    const { title, content, date, price, address, } = req.body;
+    const adToUpdate = await Ad.findById(req.params.id).populate('seller');
 
     if (!adToUpdate) {
       return res.status(404).json({ error: 'Ad not found' });
     }
+console.log('login', adToUpdate.seller.login);
 
-
-    if (req.session.login !== adToUpdate.seller.toString()) {
+    if (req.session.login !== adToUpdate.seller.login.toString()) {
       return res.status(403).json({ error: 'Forbidden - Not authorized to edit this ad' });
     }
 
@@ -111,10 +111,10 @@ exports.edit = async (req, res) => {
 };
 exports.delete = async (req, res) => {
   try {
-    const adToDelete = await Ad.findById(req.params.id);
+    const adToDelete = await Ad.findById(req.params.id).populate('seller');
     if (adToDelete) {
 
-      if (req.session.login !== adToDelete.seller.toString()) {
+      if (req.session.login !== adToDelete.seller.login.toString()) {
         return res.status(403).json({ error: 'Forbidden - Not authorized to delete this ad' });
       }
 

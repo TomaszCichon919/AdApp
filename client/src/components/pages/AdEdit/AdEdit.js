@@ -7,6 +7,8 @@ import { Alert } from 'react-bootstrap';
 import { Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { getUser } from '../../../redux/usersRedux';
+import { useSelector } from 'react-redux';
 
 const AdEdit = () => {
     const [title, setTitle] = useState('');
@@ -20,6 +22,15 @@ const AdEdit = () => {
 
     const navigate = useNavigate();
     const { id } = useParams();
+    const user = useSelector(getUser);
+
+
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
 
     useEffect(() => {
         const fetchAdData = async () => {
@@ -49,7 +60,7 @@ const AdEdit = () => {
     const handleSubmit = e => {
       e.preventDefault();
       console.log(title, date, address, price, photo);
-  
+  console.log('photo8', photo);
   
       const fd = new FormData();
       fd.append('title', title);
@@ -116,7 +127,7 @@ const AdEdit = () => {
   
         <Form className="col-12 col-sm-3 mx-auto" onSubmit={handleSubmit}>
   
-          <h1 className="my-4">Add new Ad</h1>
+          <h1 className="my-4">Edit ad</h1>
   
           
           <Form.Group className="mb-3" controlId="formTitle">
@@ -146,7 +157,7 @@ const AdEdit = () => {
   
           <Form.Group className="mb-3" controlId="formFile">
             <Form.Label>Photo</Form.Label>
-            <Form.Control type="file" onChange={e => setPhoto(e.target.files[0])}></Form.Control>
+            <Form.Control type="file"  onChange={e => setPhoto(e.target.files[0])}></Form.Control>
           </Form.Group>
   
           <Button variant="dark" type="submit">

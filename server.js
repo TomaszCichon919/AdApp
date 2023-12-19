@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const socket = require('socket.io');
+
 
 
 const app = express();
@@ -18,20 +18,16 @@ app.use(express.urlencoded({ extended: false }));
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
 });
-
-const io = socket(server);
-
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-});
-
+const NODE_ENV = process.env.NODE_ENV;
+let dbUri = '';  
+if (NODE_ENV === 'production') dbUri = 'mongodb+srv://tomekcichon03005:Atlas1212@cluster0.alnb1dj.mongodb.net/AdDB?retryWrites=true&w=majority';
+else dbUri = 'mongodb://0.0.0.0:27017/AdApp';
 
 app.use(
     session({
       secret: process.env.SECRET,
       store: MongoStore.create({
-        mongoUrl: 'mongodb://0.0.0.0:27017/AdApp', 
+        mongoUrl: dbUri, 
         mongooseConnection: mongoose.connection,
         resave: false, 
         saveUnintialized: false
@@ -49,16 +45,12 @@ app.use('/auth', authRoutes);
 
 
 
-   const NODE_ENV = process.env.NODE_ENV;
-  let dbUri = '';
-  
-  if (NODE_ENV === 'production') dbUri = 'mongodb+srv://tomekcichon03005:Atlas1212@cluster0.alnb1dj.mongodb.net/AdDB?retryWrites=true&w=majority';
-  else dbUri = 'mongodb://0.0.0.0:27017/AdApp';
+
+
   
   mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// connects our backend code with the database
-// mongoose.connect('mongodb://0.0.0.0:27017/AdApp', { useNewUrlParser: true });
+
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -75,18 +67,6 @@ db.once('open', () => {
   });
   
 
-  // io.on('connection', async (socket) => {
-  //   console.log('New socket');
-  //   try {
-  //     const seatsData = await Seat.find();
-  //     socket.emit('seatsUpdated', JSON.stringify(seatsData));
-  //   } catch (err) {
-  //     console.error('Error fetching seats:', err);
-  //   }
-  
-  //   socket.on('disconnect', () => {
-  //     console.log('Client disconnected');
-  //   });
-  // });
+
   
   module.exports = server;

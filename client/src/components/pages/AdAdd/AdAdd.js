@@ -6,6 +6,9 @@ import { API_URL } from '../../../config';
 import { Alert } from 'react-bootstrap';
 import { Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../../redux/usersRedux';
 
 const AdAdd = () => {
     const [title, setTitle] = useState('');
@@ -17,6 +20,13 @@ const AdAdd = () => {
     const [status, setStatus] = useState(null);
 
     const navigate = useNavigate();
+    const user = useSelector(getUser);
+
+    useEffect(() => {
+        if (!user) {
+          navigate('/login');
+        }
+      }, [user, navigate]);
   
     console.log('url', `${API_URL}/api/ads`)
     const handleSubmit = e => {
