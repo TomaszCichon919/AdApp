@@ -12,11 +12,11 @@ import { getUser } from '../../../redux/usersRedux';
 const Ad = () => {
     const { id } = useParams();
     const [ad, setAd] = useState(null);
-console.log(id);
+
 
 const user = useSelector(getUser);
 const navigate = useNavigate();
-
+console.log(user);
 useEffect(() => {
     const fetchAd = async () => {
       try {
@@ -60,16 +60,15 @@ console.log('is?', canEditOrDelete)
 
 return (
   <Container>
-    <h1>Ad details:</h1>
-   <Col key={ad._id} xs={8} className='wrapper'>
-    <h3 className='pt-2'>{ad.title}</h3>
+    <h2>Ad details</h2>
+   <Col key={ad._id} className='wrapper'>
+    <h3 className='pt-2 px-2'>{ad.title}</h3>
     <Row>
       <Col xs={6}>
-        <div className='img-container'>
-          <img className='ad_img' src={IMGS_URL + ad.photo} alt={ad._id} />
-        </div>
+          <img className='ad_img p-2' src={IMGS_URL + ad.photo} alt={ad._id} />
       </Col>
       <Col xs={6}>
+        <div>
         <p>
           <span className='caption'>Address</span>
           {ad.address}
@@ -78,10 +77,19 @@ return (
           <span className='caption'>Seller</span>
           {ad.seller.login}
         </p>
-        <div className='buttons-container'>
+        <p>
+          <span className='caption'>Date</span>
+          {ad.date}
+        </p>
+        <p>
+          <span className='caption'>Price</span>
+          {ad.price}$
+        </p>
+        </div>
+        <div className='buttons-wrapper'>
         {canEditOrDelete && (
                 <Button
-                  className='mb-2 align-self-end'
+                  className='my-2 mx-3 px-5'
                   variant='warning'
                   block
                   onClick={handleEditClick}
@@ -91,7 +99,7 @@ return (
               )}
               {canEditOrDelete && (
                 <Button
-                  className='mb-2 align-self-end'
+                  className='my-2 mx-3 px-5'
                   variant='danger'
                   block
                   onClick={handleDeleteClick}
@@ -103,13 +111,13 @@ return (
       </Col>
     </Row>
   </Col>
-  <h1>Seller details</h1>
-  <Col key={ad._id} xs={8} className='wrapper'>
-    <h3 className='pt-2'>{ad.seller.login}</h3>
+  <h2>Seller details</h2>
+  <Col key={ad._id} className='wrapper'>
+    <h3 className='pt-2 px-2'>{ad.seller.login}</h3>
     <Row>
       <Col xs={6}>
         <div className='img-container'>
-          <img className='ad_img' src={IMGS_URL + ad.seller.avatar} alt={ad._id} />
+          <img className='avatar p-2' src={IMGS_URL + ad.seller.avatar} alt={ad.seller._id} />
         </div>
       </Col>
       <Col xs={6}>
@@ -118,7 +126,7 @@ return (
           {ad.seller.phone}
         </p>
         <p>
-          <span className='caption'>Seller</span>
+          <span className='caption'>Login</span>
           {ad.seller.login}
         </p>
       

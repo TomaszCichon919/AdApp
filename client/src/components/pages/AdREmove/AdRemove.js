@@ -15,6 +15,7 @@ const AdRemove = () => {
       try {
         const options = {
           method: 'DELETE',
+          credentials: 'include'
         };
 
         const response = await fetch(`${API_URL}/api/ads/${id}`, options);
@@ -35,8 +36,7 @@ const AdRemove = () => {
 
   return (
     <Container>
-      <h1>AdRemove</h1>
-      {/* You might add some loading or success/error messages here */}
+   <p>removing ad...</p>
     </Container>
   );
 };

@@ -5,20 +5,28 @@ import { Row, Col } from 'react-bootstrap';
 const AdsList = ({ ads }) => {
   const adPairs = [];
 
-  // Group ads into pairs
+
   for (let i = 0; i < ads.length; i += 2) {
-    adPairs.push(
-      <Row key={i}>
-        <Col>
-          <AdSummary {...ads[i]} />
-        </Col>
-        {i + 1 < ads.length && (
-          <Col>
+    if (i === ads.length - 1) {
+      adPairs.push(
+        <Row key={i}>
+          <Col xs={6}>
+            <AdSummary {...ads[i]} />
+          </Col>
+        </Row>
+      );
+    } else {
+      adPairs.push(
+        <Row key={i}>
+          <Col xs={6}>
+            <AdSummary {...ads[i]} />
+          </Col>
+          <Col xs={6}>
             <AdSummary {...ads[i + 1]} />
           </Col>
-        )}
-      </Row>
-    );
+        </Row>
+      );
+    }
   }
 
   return <>{adPairs}</>;
