@@ -96,7 +96,7 @@ setStatus('loading');
 
       <Form className="col-12 col-sm-3 mx-auto" onSubmit={handleSubmit}>
 
-        <h1 className="my-4">Sing up</h1>
+        <h1 className="my-4">Register</h1>
 
         
         <Form.Group className="mb-3" controlId="formLogin">

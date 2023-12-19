@@ -18,10 +18,10 @@ const navigate = useNavigate();
 return (
 
 
-  <div>
+
     <Container>
       <h1>List of all ads</h1>
-      <div>
+ 
       <Form className="col-12 col-sm-3 mx-auto" onSubmit={handleSubmit}>
   
   
@@ -38,10 +38,9 @@ return (
   </Button>
 
 </Form>
-      </div>
       <AllAds />
     </Container>
-  </div>
+
 );
 }
 export default HomePage;

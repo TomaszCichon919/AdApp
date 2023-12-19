@@ -10,10 +10,11 @@
 .ad_img {
 height: 100%;
 width: 100%;
+border-radius: 5%;
 }
 
 .img-container {
-  height: 200px; /* Set the fixed height you desire */
+  height: 200px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,10 +29,13 @@ width: 100%;
 .buttons-container {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adjust the spacing between buttons */
+  gap: 10px; 
 }
 
 .buttons-container a {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; 
   width: 100%;
 }
 
