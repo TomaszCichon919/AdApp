@@ -1,4 +1,4 @@
-import { Row, Col } from 'reactstrap';
+import { Row, Col } from 'react-bootstrap';
 import React from 'react';
 import './AdSummary.scss';
 import Button from 'react-bootstrap/Button';

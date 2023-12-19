@@ -29,11 +29,11 @@ export const editPost = payload => ({ type: EDIT_ADS, payload });
 export const loadAdsRequest = () => {
   return async dispatch => {
     try {
-      const response = await fetch('http://localhost:8000/api/ads');
+      const response = await fetch(`${API_URL}/api/ads`);
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(loadAds(data)); // Dispatch the action with fetched data
+        dispatch(loadAds(data)); 
       } else {
         throw new Error('Failed to fetch');
       }

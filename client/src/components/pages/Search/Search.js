@@ -1,5 +1,5 @@
-import { Alert, Container } from 'reactstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../../../config';
 import AdsList from '../../features/AdsList/AdsList';

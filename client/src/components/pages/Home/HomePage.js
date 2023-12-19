@@ -1,9 +1,8 @@
 import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import PromoCarousel from './../../features/PromoCarousel/PromoCarousel';
+import { useState} from 'react';
+import { useNavigate} from 'react-router-dom';
 import AllAds from '../../features/AllAds/AllAds';
 
 const HomePage = () => {
@@ -20,7 +19,6 @@ return (
 
 
   <div>
-    <PromoCarousel />
     <Container>
       <h1>List of all ads</h1>
       <div>

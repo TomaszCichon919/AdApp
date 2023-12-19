@@ -1,4 +1,4 @@
-import { Alert, Progress } from 'reactstrap';
+import { Alert } from 'react-bootstrap';
 import AdsList from '../AdsList/AdsList';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAds, loadAdsRequest } from '../../../redux/adsRedux';

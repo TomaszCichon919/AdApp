@@ -19,7 +19,7 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
 
   try {
-    const adToSelect = await Ad.findById(req.params.id);
+    const adToSelect = await Ad.findById(req.params.id).populate('seller');
     if (!adToSelect) res.status(404).json({ message: 'Ad not found' });
     else res.json(adToSelect);
   }
@@ -53,7 +53,7 @@ exports.addNew = async (req, res) => {
         photo: req.file.filename,
         price,
         address,
-        seller: req.session.login,
+        seller: req.session.userId,
       });
 
       await newAd.save();
