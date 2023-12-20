@@ -24,7 +24,7 @@ const authMiddleware = async (req, res, next) => {
 
   }
   else {
-    if (req.session.user) {
+    if (req.session.login) {
       next();
     } else {
       console.log('outside base')

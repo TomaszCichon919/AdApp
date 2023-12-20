@@ -67,21 +67,26 @@ exports.getUser = async (req, res) => {
 exports.logout = async (req, res) => {
     try {
         if (process.env.NODE_ENV !== "production") {
-  await Session.deleteMany({});
+            // Delete all sessions (for development/testing purposes)
+            await Session.deleteMany({});
+            res.status(200).send({ message: 'All sessions deleted (development only)' });
         } else {
-        if (req.session) {
-            const sessionId = req.session.id; 
-            await req.session.destroy();
-     
-            activeSessions.delete(sessionId);
-            
-            res.status(200).send({ message: 'Logged out successfully' });
-        } else {
-            res.status(400).send({ message: 'No active session' });
+            if (req.session && req.session.id) {
+                // Destroy the session if it exists
+                await req.session.destroy();
+                
+                // Remove the session ID from any external session management
+                // activeSessions.delete(req.session.id); // Adjust as per your actual implementation
+
+                res.status(200).send({ message: 'Logged out successfully' });
+            } else {
+                res.status(400).send({ message: 'No active session' });
+            }
         }
-    }
     } catch (err) {
-        res.status(500).send({ message: 'Error during logout process', error: err.message });
+  
+        console.error('Error during logout process:', err);
+        res.status(500).send({ message: 'Error during logout process' });
     }
 };
 
