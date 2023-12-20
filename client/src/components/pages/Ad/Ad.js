@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { IMGS_URL } from '../../../config'
 import { API_URL } from '../../../config';
 import { getUser } from '../../../redux/usersRedux';
+import './Ad.scss';
 
 
 const Ad = () => {
@@ -85,7 +86,7 @@ const Ad = () => {
                             {ad.price}$
                         </p>
                         <p>
-                            <span className='caption'>Content</span>
+                            <span className='caption'>Description</span>
                             {ad.content}$
                         </p>
                         <div className='buttons-wrapper'>
@@ -114,12 +115,12 @@ const Ad = () => {
                 </Row>
             </Col>
             <h2>Seller details</h2>
-            <Col key={ad._id} className='wrapper'>
+            <Col key={ad.seller._id} className='wrapper'>
                 <h3 className='pt-2 px-2'>{ad.seller.login}</h3>
                 <Row>
                     <Col xs={6}>
                         <div className='img-container'>
-                            <img className='avatar p-2' src={IMGS_URL + ad.seller.avatar} alt={ad.seller._id} />
+                            <img className='avatar mb-4' src={IMGS_URL + ad.seller.avatar} alt={ad.seller._id} />
                         </div>
                     </Col>
                     <Col xs={6}>

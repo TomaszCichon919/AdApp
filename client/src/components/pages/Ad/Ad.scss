@@ -7,18 +7,19 @@
   }
   
  
-.avatar {
-    height: 100%;
-    width: 100%;
+  .avatar {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    }
+    box-shadow: 0 0 10px 10px rgba(0,0,0,0.1);
+    object-fit: cover;
+  }
   
   .img-container {
     height: 100%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50;
   }
   
   .img-container img {
