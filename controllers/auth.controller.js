@@ -66,6 +66,9 @@ exports.getUser = async (req, res) => {
 }
 exports.logout = async (req, res) => {
     try {
+        if (process.env.NODE_ENV !== "production") {
+  await Session.deleteMany({});
+        } else {
         if (req.session) {
             const sessionId = req.session.id; 
             await req.session.destroy();
@@ -76,6 +79,7 @@ exports.logout = async (req, res) => {
         } else {
             res.status(400).send({ message: 'No active session' });
         }
+    }
     } catch (err) {
         res.status(500).send({ message: 'Error during logout process', error: err.message });
     }
@@ -85,7 +89,6 @@ exports.getAllSessions = async (req, res) => {
     try {
       const sessions = await Session.find();
   
-      // Extracting login and userId from each session
       const formattedSessions = sessions.map((session) => {
         const sessionData = JSON.parse(session.session);
         const { login, userId } = sessionData;

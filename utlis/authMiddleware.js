@@ -27,6 +27,7 @@ const authMiddleware = async (req, res, next) => {
     if (req.session.user) {
       next();
     } else {
+      console.log('outside base')
       res.status(401).send({ message: 'You are not authorized' });
     }
   }

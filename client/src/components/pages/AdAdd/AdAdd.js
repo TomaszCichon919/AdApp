@@ -129,7 +129,7 @@ const AdAdd = () => {
             {status === "contentError" && (
                 <Alert variant="danger">
                     <Alert.Heading>invalid title length</Alert.Heading>
-                    <p>title has to be between 20 and 1000 characters in length </p>
+                    <p>content has to be between 20 and 1000 characters in length </p>
                 </Alert>
             )}
 

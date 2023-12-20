@@ -27,7 +27,7 @@ const NODE_ENV = process.env.NODE_ENV;
 let dbUri = '';  
 if (NODE_ENV === 'production') dbUri = 'mongodb+srv://tomekcichon03005:Atlas1212@cluster0.alnb1dj.mongodb.net/AdDB?retryWrites=true&w=majority';
 else dbUri = 'mongodb://0.0.0.0:27017/AdApp';
-
+console.log('database', dbUri);
 app.use(
     session({
       secret: process.env.SECRET,
@@ -44,7 +44,6 @@ const adRoutes = require('./routes/ads.routes');
 const authRoutes = require('./routes/auth.routes');
 
 
-// app.use('/api', userRoutes); 
 app.use('/api', adRoutes); 
 app.use('/auth', authRoutes); 
 
