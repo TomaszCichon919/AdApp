@@ -9,7 +9,12 @@ const MongoStore = require('connect-mongo');
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://adapp.tomaszcichon919.repl.co', 
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(express.static(path.join(__dirname, '/public')));

@@ -119,7 +119,7 @@ const Ad = () => {
                 <h3 className='pt-2 px-2'>{ad.seller.login}</h3>
                 <Row>
                     <Col xs={6}>
-                        <div className='img-container'>
+                        <div className='ad-img-container'>
                             <img className='avatar mb-4' src={IMGS_URL + ad.seller.avatar} alt={ad.seller._id} />
                         </div>
                     </Col>
