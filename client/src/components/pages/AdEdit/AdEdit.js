@@ -154,7 +154,7 @@ const AdEdit = () => {
 
                 <Form.Group className="mb-3" controlId="formTitle">
                     <Form.Label>Title</Form.Label>
-                    <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Enter login"></Form.Control>
+                    <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Enter title"></Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formDate">
